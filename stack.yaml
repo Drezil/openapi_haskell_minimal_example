@@ -1,4 +1,4 @@
-resolver: lts-13.20
+resolver: lts-13.22
 extra-deps:
 - servant-0.16
 - servant-server-0.16
