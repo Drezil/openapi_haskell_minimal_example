@@ -118,7 +118,7 @@ formatSeparatedQueryList char = T.intercalate (T.singleton char) . map toQueryPa
 
 -- | Servant type-level API, generated from the OpenAPI spec for Example.
 type ExampleAPI
-    =    "foo" :> ReqBody '[JSON] Text :> Verb 'POST 200 '[JSON] APIResponse -- 'extractDescription' route
+    =    "foo" :> ReqBody '[JSON] APIRequest :> Verb 'POST 200 '[JSON] APIResponse -- 'extractDescription' route
 
 
 -- | Server or client configuration, specifying the host and port to query or serve on.
@@ -138,7 +138,7 @@ newtype ExampleClientError = ExampleClientError ClientError
 -- is a backend that executes actions by sending HTTP requests (see @createExampleClient@). Alternatively, provided
 -- a backend, the API can be served using @runExampleServer@.
 data ExampleBackend m = ExampleBackend
-  { extractDescription :: Text -> m APIResponse{- ^  -}
+  { extractDescription :: APIRequest -> m APIResponse{- ^  -}
   }
 
 newtype ExampleClient a = ExampleClient

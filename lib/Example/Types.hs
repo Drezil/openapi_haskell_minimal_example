@@ -4,6 +4,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-binds -fno-warn-unused-imports #-}
 
 module Example.Types (
+  APIRequest (..),
   APIResponse (..),
   ) where
 
@@ -23,6 +24,22 @@ import qualified Data.Text as T
 import qualified Data.Map as Map
 import GHC.Generics (Generic)
 import Data.Function ((&))
+
+
+-- | 
+data APIRequest = APIRequest
+  { aPIRequestFooStartDate :: Text -- ^ 
+  , aPIRequestBarUnderscoreStartDate :: Text -- ^ 
+  } deriving (Show, Eq, Generic, Data)
+
+instance FromJSON APIRequest where
+  parseJSON = genericParseJSON (removeFieldLabelPrefix True "aPIRequest")
+instance ToJSON APIRequest where
+  toJSON = genericToJSON (removeFieldLabelPrefix False "aPIRequest")
+instance ToSchema APIRequest where
+  declareNamedSchema = Swagger.genericDeclareNamedSchema
+    $ Swagger.fromAesonOptions
+    $ removeFieldLabelPrefix False "aPIRequest"
 
 
 -- | 

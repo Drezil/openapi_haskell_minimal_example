@@ -13,5 +13,5 @@ main = do
       config = Config "http://localhost:8080/"
   runExampleServer config server
 
-impl :: (MonadIO m, MonadThrow m) => Text -> m APIResponse
-impl _ = return $ APIResponse [pack "foo"] [pack "bar"]
+impl :: (MonadIO m, MonadThrow m) => APIRequest -> m APIResponse
+impl (APIRequest x y) = return $ APIResponse [x] [y]

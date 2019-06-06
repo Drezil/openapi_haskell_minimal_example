@@ -1,6 +1,7 @@
 {-# LANGUAGE RecordWildCards #-}
 
 import Example.API as API
+import Example.Types
 
 import           Network.HTTP.Client     (newManager)
 import           Network.HTTP.Client.TLS (tlsManagerSettings)
@@ -20,5 +21,5 @@ main = do
   let ExampleBackend{..} = API.createExampleClient
 
   -- Any Example API call can go here, e.g. here we call `getSomeEndpoint`
-  result <- API.callExample (mkClientEnv manager url) (extractDescription (T.pack "foo"))
+  result <- API.callExample (mkClientEnv manager url) (extractDescription (APIRequest (T.pack "foo") (T.pack "bar")))
   print result

@@ -13,6 +13,16 @@ definitions:
           type: string
         type: array
     type: object
+  APIRequest:
+    type: object
+    properties:
+      fooStartDate:
+        type: string
+      bar_StartDate:
+        type: string
+    required:
+      - fooStartDate
+      - bar_StartDate
 info:
   title: Example
   version: 0.0.0
@@ -28,7 +38,7 @@ paths:
           name: some_html
           required: true
           schema:
-            type: string
+            $ref: '#/definitions/APIRequest'
       produces:
         - application/json
       responses:
