@@ -1,0 +1,42 @@
+definitions:
+  APIResponse:
+    required: 
+      - class_names
+      - result
+    properties:
+      class_names:
+        items:
+          type: string
+        type: array
+      result:
+        items:
+          type: string
+        type: array
+    type: object
+info:
+  title: Example
+  version: 0.0.0
+paths:
+  /foo:
+    post:
+      consumes:
+        - application/json
+      description: ''
+      operationId: extract_description
+      parameters:
+        - in: body
+          name: some_html
+          required: true
+          schema:
+            type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: result
+          schema:
+            $ref: '#/definitions/APIResponse'
+      summary: 'Submit HTML, recieve extractions'
+schemes:
+  - http
+swagger: '2.0'
